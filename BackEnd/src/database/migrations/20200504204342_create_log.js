@@ -4,6 +4,7 @@ exports.up = function(knex) {
         table.increments('id').primary();
         table.string('city').notNullable();
         table.string('country').notNullable();
+        table.string('temp').notNullable();
         table.string('weather').notNullable();
         table.integer('humidity').notNullable();
         table.integer('cloudiness_percent').notNullable();

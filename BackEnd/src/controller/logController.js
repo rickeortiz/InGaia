@@ -18,7 +18,7 @@ module.exports = {
             if (parameter == '')
                 return response.json(await connection('log').count());
             else
-                return response.json(await connection('log').select({'parameter': parameter}).count().groupBy(parameter).orderBy('count', 'desc'));
+                return response.json(await connection('log').select({ 'parameter': parameter }).count().groupBy(parameter).orderBy(2, 'desc'));
         }
         catch (err) {
             return response.status(404).json({ error: 'parameter invalid' });

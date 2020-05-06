@@ -3,15 +3,14 @@
 module.exports = {
 
   development: {
-    client: 'pg',
+    client: 'sqlite3',
     connection: {
-      host: 'localhost',
-      user: 'postgres',
-      database: 'music'
+      filename: './src/database/db.sqlite'
     },
     migrations: {
       directory: './src/database/migrations'
-    }
+    },
+    useNullAsDefault: true
   },
 
   staging: {

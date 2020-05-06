@@ -30,6 +30,7 @@ module.exports = {
         await connection('log').insert({
             city,
             country,
+            temp,
             weather,
             humidity,
             cloudiness_percent,
