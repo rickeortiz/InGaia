@@ -45,7 +45,6 @@
         axios
             .get('/getParametersString')
             .then(resParam => {
-                alert(resParam.data[0]);
                 resParam.data.forEach(parameter => {
                     document
                         .querySelector('#logString')
