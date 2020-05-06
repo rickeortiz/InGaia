@@ -15,7 +15,7 @@ module.exports = {
     async columnsInteger() {
         const columns = [
             'humidity',
-            'cloudiness_percent'
+            'cloudinessPercent'
         ];
 
         return columns;

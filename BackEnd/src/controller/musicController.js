@@ -17,7 +17,7 @@ module.exports = {
         const weather = returnTemp.data.weather[0].main;
         const temp = converter.ConvertKelvinToCelsius(returnTemp.data.main.temp);
         const humidity = returnTemp.data.main.humidity;
-        const cloudiness_percent = returnTemp.data.clouds.all;
+        const cloudinessPercent = returnTemp.data.clouds.all;
 
         let categoryMusic = '';
         if(temp > 25)
@@ -33,7 +33,7 @@ module.exports = {
             temp,
             weather,
             humidity,
-            cloudiness_percent,
+            cloudinessPercent,
             categoryMusic
         });
 

@@ -7,7 +7,7 @@ exports.up = function(knex) {
         table.string('temp').notNullable();
         table.string('weather').notNullable();
         table.integer('humidity').notNullable();
-        table.integer('cloudiness_percent').notNullable();
+        table.integer('cloudinessPercent').notNullable();
         table.string('categoryMusic').notNullable();
         table.timestamp('timestamp').defaultTo(knex.fn.now());
     })
