@@ -51,7 +51,7 @@
                             .querySelector('#logString')
                             .innerHTML + `<table id=${parameter}>`
                     axios
-                        .get(`getLogCount?parameter=${parameter}`)
+                        .get(`/getLogCount?parameter=${parameter}`)
                         .then(res => {
                             document
                                 .querySelector(`#${parameter}`)
@@ -84,7 +84,7 @@
                             .querySelector('#logInteger')
                             .innerHTML + `<table id=${parameter} class="classInteger">`
                     axios
-                        .get(`getLogQuartil?parameter=${parameter}`)
+                        .get(`/getLogQuartil?parameter=${parameter}`)
                         .then(res => {
                             document
                                 .querySelector(`#${parameter}`)
