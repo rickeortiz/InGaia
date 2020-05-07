@@ -6,7 +6,7 @@ const parameterController = require('./controller/parameterController');
 
 const routes = express.Router();
 
-routes.get('/getTempByCity', musicController.getTempByCity);
+routes.get('/getMusicByCity', musicController.getMusicByCity);
 
 routes.get('/getLog', logController.getLog);
 routes.get('/getLogCount', logController.getCount);

@@ -4,7 +4,7 @@ const converter = require('../util/converter');
 const spotify = require('../services/spotifyService');
 
 module.exports = {
-    async getTempByCity(request, response) {
+    async getMusicByCity(request, response) {
         let { city } = request.query;
 
         const returnTemp = await openWeather.getTempByCity(city);
