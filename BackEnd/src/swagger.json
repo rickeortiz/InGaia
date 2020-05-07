@@ -2,164 +2,251 @@
     "swagger": "2.0",
     "info": {
       "version": "1.0.0",
-      "title": "musicByCity",
-      "description": "Traz as músicas de acordo com a cidade passada no Parâmetro",
-      "license": {
-        "name": "",
-        "url": ""
-      }
+      "title": "Music By City",
+      "description": "Traz as músicas de acordo com a temperatura da cidade."
     },
-    "host": "localhost:3000",
-    "basePath": "/",
-    "tags": [
-      {
-        "name": "Users",
-        "description": "API for users in the system"
-      }
-    ],
     "schemes": [
-      "http"
+      "https"
     ],
-    "consumes": [
-      "application/json"
-    ],
-    "produces": [
-      "application/json"
-    ],
+    "host": "service-music.herokuapp.com",
     "paths": {
-      "/users": {
-        "post": {
-          "tags": [
-            "Users"
-          ],
-          "description": "Create new user in system",
-          "parameters": [
-            {
-              "name": "user",
-              "in": "body",
-              "description": "User that we want to create",
-              "schema": {
-                "$ref": "#/definitions/User"
-              }
-            }
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "New user is created",
-              "schema": {
-                "$ref": "#/definitions/User"
-              }
-            }
-          }
-        },
+      "/getMusicByCity": {
         "get": {
           "tags": [
-            "Users"
+            "Music"
           ],
-          "summary": "Get all users in system",
+          "summary": "Traz a lista de músicas",
+          "description": "Lista de músicas de acordo com a temperatura cidade.",
+          "parameters": [
+            {
+              "name": "city",
+              "in": "query",
+              "description": "Cidade que será feita a busca",
+              "type": "string"
+            }
+          ],
           "responses": {
             "200": {
-              "description": "OK",
+              "description": "Lista de Músicas",
               "schema": {
-                "$ref": "#/definitions/Users"
+                "type": "object",
+                "properties": {
+                  "trackies": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
               }
             }
           }
         }
       },
-      "/users/{userId}": {
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "description": "ID of user that we want to find",
-            "type": "string"
-          }
-        ],
+      "/getLog": {
         "get": {
           "tags": [
-            "Users"
+            "Log"
           ],
-          "summary": "Get user with given ID",
+          "summary": "Traz todos os registros que foram pesquisados na API.",
           "responses": {
             "200": {
-              "description": "User is found",
+              "description": "Traz os logs",
               "schema": {
-                "$ref": "#/definitions/User"
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "temp": {
+                    "type": "string"
+                  },
+                  "weather": {
+                    "type": "string"
+                  },
+                  "humidity": {
+                    "type": "number"
+                  },
+                  "cloudinessPerfcent": {
+                    "type": "number"
+                  },
+                  "categoryMusic": {
+                    "type": "string"
+                  }
+                }
               }
             }
-          }
-        },
-        "delete": {
-          "summary": "Delete user with given ID",
-          "tags": [
-            "Users"
-          ],
-          "responses": {
-            "200": {
-              "description": "User is deleted",
-              "schema": {
-                "$ref": "#/definitions/User"
-              }
-            }
-          }
-        },
-        "put": {
-          "summary": "Update user with give ID",
-          "tags": [
-            "Users"
-          ],
-          "parameters": [
-            {
-              "name": "user",
-              "in": "body",
-              "description": "User with new values of properties",
-              "schema": {
-                "$ref": "#/definitions/User"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "User is updated",
-              "schema": {
-                "$ref": "#/definitions/User"
-              }
-            }
-          }
-        }
-      }
-    },
-    "definitions": {
-      "User": {
-        "required": [
-          "email",
-          "_id"
-        ],
-        "properties": {
-          "_id": {
-            "type": "string",
-            "uniqueItems": true
-          },
-          "email": {
-            "type": "string",
-            "uniqueItems": true
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "firstName": {
-            "type": "string"
           }
         }
       },
-      "Users": {
-        "type": "array",
-        "$ref": "#/definitions/User"
+      "/getLogCount": {
+        "get": {
+          "tags": [
+            "Log"
+          ],
+          "summary": "Sumariza a quantidade de registros",
+          "description": "Sumariza a quantidade de city, country, weather, categoryMusic",
+          "parameters": [
+            {
+              "name": "parameter",
+              "in": "query",
+              "description": "coluna que será sumarizada",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Ok",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "parameter": {
+                      "type": "string"
+                    },
+                    "Qtde": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Parâmetro Nulo",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Parâmetro inválido",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/getLogQuartil": {
+        "get": {
+          "tags": [
+            "Log"
+          ],
+          "summary": "Traz a quantidade de registros por quartil",
+          "parameters": [
+            {
+              "name": "parameter",
+              "in": "query",
+              "description": "coluna que será sumarizada",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Ok",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "Quartil1": {
+                      "type": "integer",
+                      "description": "De 0 a 25%"
+                    },
+                    "Quartil2": {
+                      "type": "integer",
+                      "description": "De 26% a 50%"
+                    },
+                    "Quartil3": {
+                      "type": "integer",
+                      "description": "De 51% a 75%"
+                    },
+                    "Quartil4": {
+                      "type": "integer",
+                      "description": "De 76% a 100%"
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Parâmetro Nulo",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Parâmetro inválido",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/getParametersString": {
+        "get": {
+          "tags": [
+            "Parameter"
+          ],
+          "summary": "Traz os parâmetros que, no log, são sumarizados",
+          "responses": {
+            "200": {
+              "description": "Ok",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/getParametersInteger": {
+        "get": {
+          "tags": [
+            "Parameter"
+          ],
+          "summary": "Traz os parâmetros que, no log, são feito os Quartis",
+          "responses": {
+            "200": {
+              "description": "Ok",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -11,8 +11,8 @@ module.exports = {
         const { parameter = '' } = request.query;
         const acepted = await parameters.columnsString();
 
-        if (acepted.indexOf(parameter, 0) == -1)
-            return response.status(404).json({ error: 'parameter invalid' });
+        if (parameter == '' || acepted.indexOf(parameter, 0) == -1)
+            return response.status(400).json({ error: 'parameter is null' });
 
         try {
             if (parameter == '')
